@@ -4,7 +4,7 @@ Neural Network Emulator
 import numpy as np
 import torch
 from collections.abc import Iterable
-from myloss import MyLoss
+
 from .emulator import Emulator
 
 
@@ -129,7 +129,7 @@ class NNEmulator(Emulator, torch.nn.Module):
         kwargs : additional keyword arguments for loss_fn
         """
         if loss_fn is None:
-            self.loss_fn = MyLoss(reduction='none')
+            self.loss_fn = torch.nn.MSELoss(reduction='mean')
         if optim is None:
             self.optim = torch.optim.Rprop(self.parameters(), lr=0.01)
 
