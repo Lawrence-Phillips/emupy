@@ -73,10 +73,10 @@ class MyLoss(_Loss):
 
     def forward(self, input: Tensor, target: Tensor) -> Tensor:
         penalty = 0
-        if max(input) > 1:
+        if torch.max(input) > 1:
         # want to keep it convex
             penalty = (torch.max(input)-1)**4*10**5
-        if min(input) < 0:
+        if torch.min(input) < 0:
             penalty = (0-torch.min(input))**4*10**5
-        if 
+            
         return F.mse_loss(input, target, reduction=self.reduction) + penalty
